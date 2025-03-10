@@ -1,1 +1,11 @@
-dshdb
+// producto
+- mostrar todos
+- mostrar solo 1 : buscador
+- borrar
+- modificar
+- añadir nuevo producto
+
+// venta
+actualizar el stock
+
+// login y logout
