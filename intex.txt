@@ -9,3 +9,16 @@
 actualizar el stock
 
 // login y logout
+
+
+creacion masiva de datos
+cra un seeder
+php artisan make:seeder ProductoSeeder
+Paso 2: Agregar los productos al Seeder
+Abre database/seeders/ProductoSeeder.php y edítalo 
+
+Paso 3: Ejecutar el Seeder
+Ejecuta este comando para poblar la base de datos con los productos:
+
+
+php artisan db:seed --class=ProductoSeeder
