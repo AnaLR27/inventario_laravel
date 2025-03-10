@@ -65,4 +65,23 @@ class ProductoController extends Controller
 
         return redirect()->route('productos.index')->with('success', 'Producto eliminado correctamente.');
     }
+
+    // Este método solo va a devolver la vista con el formulario de búsqueda.
+
+    public function buscarForm()
+    {
+        return view('productos.buscar'); // Aquí se devolverá la vista con el formulario
+    }
+
+
+    /*
+    *Este método va a manejar la lógica de búsqueda, tomando el nombre ingresado por el usuario y mostrando los productos que coincidan.
+     */
+    public function buscar(Request $request)
+    {
+        $searchTerm = $request->input('nombre'); // Recibe el término de búsqueda del formulario
+        $productos = Producto::where('nombre', 'like', '%' . $searchTerm . '%')->get(); // Busca productos por nombre
+
+        return view('productos.resultados', compact('productos')); // Muestra los resultados de la búsqueda
+    }
 }
