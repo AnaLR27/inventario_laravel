@@ -21,7 +21,10 @@
                     <td>{{ $producto->precio }}</td>
                     <td>{{ $producto->descripcion }}</td>
                     <td>{{ $producto->cantidad }}</td>
-                    <td>
+                    <td class="d-flex gap-2">
+                        <!-- Botón de editar -->
+                        <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-warning">Editar</a>
+                        
                         <form action="{{ route('productos.destroy', $producto->id) }}" method="POST"
                             onsubmit="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
                             @csrf

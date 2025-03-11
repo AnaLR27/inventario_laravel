@@ -31,6 +31,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     // PRODUCTOS
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
+    // Ruta para editar las caracteristicas del producto. Muestra el formulario
+    Route::get('/productos/{producto}/editar', [ProductoController::class, 'edit'])->name('productos.edit'); 
+    // Ruta para editar las caracteristicas del producto. Actualizar los cambios
+    Route::put('/productos/{producto}', [ProductoController::class, 'update'])->name('productos.update'); // Ruta para actualizar producto
+
     // Ruta para mostrar el formulario de búsqueda
     Route::get('/buscar-producto', [ProductoController::class, 'buscarForm'])->name('productos.buscarForm');
     // Ruta para procesar la búsqueda de productos
