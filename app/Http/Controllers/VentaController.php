@@ -29,6 +29,11 @@ class VentaController extends Controller
         ]);
 
         $producto = Producto::find($request->producto_id);
+        
+    // Verificar si hay suficiente stock
+    if ($request->cantidad > $producto->cantidad) {
+        return redirect()->back()->with('error', 'No hay suficiente stock disponible.');
+    }
         $precioTotal = $producto->precio * $request->cantidad;
 
         Venta::create([

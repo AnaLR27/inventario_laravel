@@ -19,7 +19,7 @@ class AuthController extends Controller
         ]);
         
         if (Auth::attempt($credentials)) {
-            return redirect()->route('productos');
+            return redirect()->route('productos.index');
         }
         return back()->withErrors(['name' => 'Credenciales incorrectas']);
     }
