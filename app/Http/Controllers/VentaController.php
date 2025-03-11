@@ -29,6 +29,8 @@ class VentaController extends Controller
         ]);
 
         $producto = Producto::find($request->producto_id);
+ 
+
         $precioTotal = $producto->precio * $request->cantidad;
 
         Venta::create([
