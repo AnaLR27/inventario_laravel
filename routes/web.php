@@ -17,10 +17,7 @@ Route::get('/about', function () {
     return view('inicio');
 });
 
-
-
-Route::get("/productos", [ProductoController::class, "index"]);
-
+// RUTAS PÚBLICAS
 //login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -30,15 +27,25 @@ Route::post('/register', [AuthController::class, 'register']);
 //logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// RUTAS PRIVADAS
 Route::middleware(['auth'])->group(function () {
-    Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
+    // PRODUCTOS
+    Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
+    // Ruta para mostrar el formulario de búsqueda
+    Route::get('/buscar-producto', [ProductoController::class, 'buscarForm'])->name('productos.buscarForm');
+    // Ruta para procesar la búsqueda de productos
+    Route::get('/buscar-producto/resultados', [ProductoController::class, 'buscar'])->name('productos.buscar');
+    // Ruta para eliminar un producto
+    Route::delete('/productos/{producto}', [ProductoController::class, 'destroy'])->name('productos.destroy');
+    // Ruta para crear un producto, mostrar el form
     Route::get('/productos/crear', [ProductoController::class, 'create'])->name('productos.create');
     Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
-    // Mostrar productos para seleccionar
+    // Ruta para editar el stock, muestra el select
     Route::get('/productos/editar-stock', [ProductoController::class, 'editStock'])->name('productos.editStock');
-
     // Actualizar stock de un producto específico
     Route::post('/productos/{producto}/actualizar-stock', [ProductoController::class, 'updateStock'])->name('productos.updateStock');
+
+    // VENTAS
     Route::get('/ventas', [VentaController::class, 'index'])->name('ventas.index');
     Route::get('/ventas/crear', [VentaController::class, 'create'])->name('ventas.create');
     Route::post('/ventas', [VentaController::class, 'store'])->name('ventas.store');
