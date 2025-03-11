@@ -21,4 +21,10 @@ class Producto extends Model
         'descripcion',
         'cantidad',
     ];
+
+    // Definir la relación con las ventas
+    public function ventas()
+    {
+        return $this->hasMany(Venta::class, 'producto_id'); // 'producto_id' es la clave foránea en la tabla ventas
+    }
 }

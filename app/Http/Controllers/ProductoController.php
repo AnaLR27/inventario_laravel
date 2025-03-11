@@ -77,11 +77,19 @@ class ProductoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Producto $producto)
+    public function destroy($id)
     {
-        $producto->delete(); // Elimina el producto de la base de datos
+        $producto = Producto::findOrFail($id);
 
-        return redirect()->route('productos.index')->with('success', 'Producto eliminado correctamente.');
+        // Verificar si el producto tiene ventas asociadas
+        if ($producto->ventas()->exists()) {
+            return redirect()->route('productos.index')->with('error', 'No se puede eliminar este producto porque tiene ventas asociadas.');
+        }
+
+        // Si no tiene ventas, proceder con la eliminación
+        $producto->delete();
+
+        return redirect()->route('productos.index')->with('success', 'Producto eliminado con éxito.');
     }
 
     // Este método solo va a devolver la vista con el formulario de búsqueda.
