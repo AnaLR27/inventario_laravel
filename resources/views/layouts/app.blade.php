@@ -41,7 +41,7 @@
                             <a class="nav-link text-white" href="/ventas">Ventas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="/logout">Salir</a>
+                            <a class="nav-link text-white" href="/login">Salir</a>
                         </li>
                     </ul>
                 </div>
