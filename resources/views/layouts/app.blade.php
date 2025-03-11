@@ -25,9 +25,7 @@
                 <!-- Enlaces alineados a la derecha -->
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="/">Inicio</a>
-                        </li>
+                   
                         <li class="nav-item">
                             <a class="nav-link text-white" href="/productos">Productos</a>
                         </li>

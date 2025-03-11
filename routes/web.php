@@ -10,15 +10,11 @@ use App\Http\Controllers\VentaController;
 
 //use GuzzleHttp\Psr7\Request;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/about', function () {
-    return view('inicio');
-});
+
 
 // RUTAS PÚBLICAS
 //login
+Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 //registro usuario
