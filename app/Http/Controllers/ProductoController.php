@@ -21,7 +21,8 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        // 
+        return view("productos.create");
     }
 
     /**
@@ -30,7 +31,18 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nombre' => 'required',
+            'precio' => 'required|numeric',
+            'descripcion' => 'nullable',
+            'cantidad' => 'required|integer'
+        ]);
+
+        Producto::create($request->all());
+        return redirect()->route('productos')->with('success', 'Producto creado exitosamente');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -62,5 +74,43 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         //
+    }
+
+
+    public function editStock(Request $request)
+    {
+        $producto = null;
+        if ($request->has('producto_id')) {
+            $producto = Producto::find($request->producto_id);
+        }
+
+        $productos = Producto::all();
+
+        return view('productos.editStock', compact('productos', 'producto'));
+    }
+
+    public function updateStock(Request $request, $producto_id)
+    {
+        $producto = Producto::find($producto_id);
+
+        if (!$producto) {
+            return redirect()->route('productos.editStock')->with('error', 'Producto no encontrado.');
+        }
+
+        $incrementar = $request->input('incrementar', 0);
+        $disminuir = $request->input('disminuir', 0);
+
+        if ($disminuir > $producto->cantidad) {
+            return redirect()->route('productos.editStock', ['producto_id' => $producto->id])
+                ->with('error', 'La cantidad a disminuir no puede ser mayor que la cantidad actual.');
+        }
+
+        $nuevaCantidad = $producto->cantidad + $incrementar - $disminuir;
+
+        $producto->cantidad = $nuevaCantidad;
+        $producto->save();
+
+        return redirect()->route('productos.editStock', ['producto_id' => $producto->id])
+            ->with('success', 'Stock actualizado correctamente.');
     }
 }

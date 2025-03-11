@@ -35,7 +35,10 @@
                             <a class="nav-link text-white" href="/buscar-producto">Buscar producto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="/crear-producto">Crear producto</a>
+                            <a class="nav-link text-white" href="/productos/crear">Crear producto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/productos/editar-stock">Editar Stock</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="/ventas">Ventas</a>

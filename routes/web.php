@@ -30,4 +30,14 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos');
+    Route::get('/productos/crear', [ProductoController::class, 'create'])->name('productos.create');
+    Route::post('/productos', [ProductoController::class, 'store'])->name('productos.store');
+   // Mostrar productos para seleccionar
+Route::get('/productos/editar-stock', [ProductoController::class, 'editStock'])->name('productos.editStock');
+
+// Actualizar stock de un producto específico
+Route::post('/productos/{producto}/actualizar-stock', [ProductoController::class, 'updateStock'])->name('productos.updateStock');
 });
+
+
+
